@@ -1,44 +1,36 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mongoose = require("mongoose");
 const dotenv = require('dotenv').config(); 
-const passport = require("passport")
 
-//Models/Schemas
-const User = require("../../app/Models/UserModel");
-const State = require("../../app/Models/stateModel");
+//Aviondb
+// const AvionDB = require("aviondb");
+// const IPFS = require("ipfs");
+// const ipfs = new IPFS();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}))
 app.use(cors());
 
-app.use(passport.initialize())
-require('./passport')
+// init a db and a collection 
+const dbInit = async () => {
+    await ipfs.ready();
 
-//connect to mongodb
-const connection = mongoose.connect(process.env.DB_ACCESS, {  
-    useNewUrlParser: true,  
-    useUnifiedTopology: true,  
- }); 
- 
-if(connection) {
-    console.log("DB connected")
-}
+    const aviondb = await AvionDB.init("DatabaseName", ipfs, { path: "./.aviondb", }); 
 
+    const collection = await aviondb.initCollection("statesDev");
+} 
 
-// Collection creation here once connected to the database
-User.createCollection().then(function(collection) {
-    console.log('userCollection is created')
-})
+//require state routes
+app.use("/", require("../js/routes/deviceStateRoutes"));
 
-State.createCollection().then(function(collection) {
-    console.log('stateCollection is created')
-})
-
-//require user routes
-app.use("/", require("../js/routes/userRoute"));
-
-app.listen(3001, function(){
-    console.log("server is running at port 3001");
+//listen to port and creates the DB if it is successful
+app.listen(3005, function(err){
+    if(!err){
+        dbInit();
+        console.log("DB created and listening for requesta at port", 3005);
+    }
+    else{
+        console.log(err);
+    }
 })

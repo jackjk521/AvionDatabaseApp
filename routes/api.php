@@ -16,8 +16,6 @@ use App\Http\Controllers\Login_RegistrationController;
 |
 */
 
-// Route::post('/register', [Login_RegistrationController::class, 'register']);
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

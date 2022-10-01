@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mongodb'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,26 +42,6 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-
-        // edits for mongodb setup in laravel
-        'mongodb' => [
-            'driver'  => 'mongodb',
-            'dsn' => env('DB_ACCESS'),
-            'database'=> env('DB_DATABASE', 'sample'),
-        ],  
-
-        // edits for mongodb setup in laravel (OLDER)
-        // 'mongodb' => [
-        //     'driver'  => 'mongodb',
-        //     'host'    => env('DB_HOST', 'localhost'),
-        //     'port'    => env('DB_PORT', 27017),
-        //     'database'=>  env('DB_DATABASE'),
-        //     'username'=> env('DB_USERNAME'),
-        //     'password'=> env('DB_PASSWORD'),
-        //     'options' =>[
-        //         'database' =>'admin' // sets the authentication database required by mongo3
-        //     ]
-        // ],  
 
         'mysql' => [
             'driver' => 'mysql',

@@ -1,6 +1,5 @@
 import React , {useState, useEffect} from "react";
 import "../../css/LoginRegister.css";
-import api from "../api/api";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';   
 
@@ -24,22 +23,22 @@ const LoginRegister = () => {
 }
 
 //added to avoid loginging in again after being authenticated
-useEffect(() => {
-  const token = localStorage.getItem('token');
-  console.log(token)
+// useEffect(() => {
+//   const token = localStorage.getItem('token');
+//   console.log(token)
 
-  axios.get("http://localhost:3001/protected", {
-      headers : {
-          Authorization : token,
-      }
-  }).then(res =>  {
-      console.log(res)
-      navigate('/protected')
-  }).catch(err => {
-      console.log(err)
-      navigate('/')
-  })
-}, [])
+//   axios.get("http://localhost:3001/protected", {
+//       headers : {
+//           Authorization : token,
+//       }
+//   }).then(res =>  {
+//       console.log(res)
+//       navigate('/protected')
+//   }).catch(err => {
+//       console.log(err)
+//       navigate('/')
+//   })
+// }, [])
 
 
   const signUp = async (e) =>{
