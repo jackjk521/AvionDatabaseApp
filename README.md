@@ -9,8 +9,6 @@
 #### npm install
 #### npm run watch
 
-## Steps for starting up the mongodb server:
-#### Edit the .env file > DB_ACCESS = (mongodb connection URL)
 
 ## To run the application
 #### Open 3 split terminal:
@@ -21,19 +19,20 @@
 
 ## Files to look at:
 
-## userRoutes.js under resources/js/routes
-#### acts as a controller and api.php in laravel setup
+## devStateRoutes.js under resources/js/routes
+#### it is where routes go through and aviondb methods for document manipulation
 ## server.js under the root folder
-#### mongodb connection and collection creation
-## LoginRegister.js under resources/js/components
-#### sliding login and registration page
-## Protected.js under resources/js/components
-#### dashboard for verified users
-## passport.js under resources/js
-#### contains the login on passportjs and strategy for authentication 
-## userModel.js under app/Models
-#### contains the userSchema
+#### dbInit() for avionDB and port listening
+## SignIn.js under resources/js/components
+#### sample of passing data from a form to route then to aviondb
 
 
+## Concept:
+#### Start from:
+#### server.js -> to initialize the avionDB with the StatesDev collection 
+#### SignIn.js -> data is sent via axios -> deviceStateRoutes.js where it gets added or updated in tha aviondb collection
+
+# Notes:
+#### Couldn't install aviondb due to variou errors - install aviondb
 composer fixes:
 update/install --ignore-platform-reqs 
